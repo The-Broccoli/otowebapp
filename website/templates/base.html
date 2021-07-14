@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="de">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>
+            {% block title %}
+            TITLE
+            {% endblock %}
+        </title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='base.css') }}">
+    </head>
+    <body>
+        <div class="container">
+            <nav>
+                <a href="/home">HOME</a>
+                <a href="/gallery">GALLERY</a>
+                <div class="dropdown">
+                    <button class="dropbtn">MORE</button>
+                    <div class="dropdown-content">
+                      <a href="/login">Link login</a>
+                      <a href="/sign-up">Link sign-up</a>
+                      <a href="/logout">Link logout</a>
+                    </div>
+                  </div>
+                <a href="/contact">CONTACT</a>
+            </nav>
+            <div class="logo-nav">
+                LOGO
+            </div>
+            <header>
+                {% block keyvisual %}
+                KEYVISUAL
+                {% endblock %}
+            </header>
+            <div class="content-container">
+                {% block content %}
+                CONTENT
+                {% endblock %}
+            </div>
+            <div class="footer-img">
+                FOOTER-IMG
+            </div>
+            <footer>
+                © 2021 Fabio Korepp
+                <a href="/impressum">Impressum</a>
+            </footer>
+        </div>
+    </body>
+</html>
