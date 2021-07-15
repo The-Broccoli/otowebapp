@@ -13,9 +13,14 @@ SETTINGS
 <!-- BLOCK CONTENT -->
 {% block content %}
 <h1>Content List</h1>
-<ul id="content">
+<ul id="content-list">
     {% for post in user.post %}
-        <li>{{post.data}}</li>
+        <li>
+            <button type="button" class="close" onClick="deletePost({{ post.id }})">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            {{ post.data }}
+        </li>
     {% endfor %}
 </ul>
 <form method="POST">
