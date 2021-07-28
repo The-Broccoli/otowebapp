@@ -6,6 +6,7 @@ import json
 import os
 
 views = Blueprint('views', __name__)
+APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 
 def allowed_file(filename):
@@ -24,35 +25,61 @@ def home():
 @login_required
 def settings():
     if request.method == 'POST':
+        # TODO !!!!!!!!!!!
+        # it must still be tested whether such a file with this name 
+        # already exists, or whether this title already exists.
+
         # check if the post request has the file part
         if 'thumbnailFile' not in request.files and 'workFile' not in request.files:
             flash('No file part!', category='error')
+            return render_template('settings.html', user=current_user)
         tfile = request.files['thumbnailFile']
         wfile = request.files['workFile']
         # if user does not select file, browser also
         # submit a empty part without filename
         if tfile.filename == '' and wfile.filename == '':
             flash('No selected file', category='error')
+            return render_template('settings.html', user=current_user)
         
-
+        # the data are stored in variables
         title = request.form.get('title')
         post_type = request.form.get('postType')
         description = request.form.get('description')
         date = request.form.get('date')
 
-        if len(description) < 1:
-            flash('description is too short!', category='error')
+        # the files must be renamed for security purposes
+        file_name = title.lower()
+        file_name = file_name.replace(' ', '_')
+        tfile.filename = file_name + '_preview'
+        wfile.filename = file_name
+
+        # check if all information is correct
+        if len(title) < 5:
+            flash('please enter a correct title!', category='error')
+            return render_template('settings.html', user=current_user)
         if post_type == None:
             flash('please select a type!', category='error')
+            return render_template('settings.html', user=current_user)
+        if len(date) > 10:
+            flash('please enter a correct date!', category='error')
+            return render_template('settings.html', user=current_user)
         else:
             new_post = Post(title=title,
                             post_type = post_type,
-                            file_name = 'TEST_FILENAME', 
+                            file_name = file_name, 
                             description = description, 
                             date = date, 
                             user_id=current_user.id)
             db.session.add(new_post)
             db.session.commit()
+
+            target = os.path.join(APP_ROOT, 'uploads/')
+            print("Couldn't create upload directory: {}".format(target))
+            destination1 = "/".join([target, tfile.filename])
+            tfile.save(destination1)
+            destination2 = "/".join([target, wfile.filename])
+            wfile.save(destination2)
+
             flash('Seite added!', category='success')
     return render_template('settings.html', user=current_user)
 

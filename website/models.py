@@ -9,7 +9,7 @@ class Post(db.Model):
     post_type = db.Column(db.String(20))
     file_name = db.Column(db.String(100))
     description = db.Column(db.String(10000))
-    date = db.Column(db.String(15))
+    date = db.Column(db.String(10))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
 class User(db.Model, UserMixin):

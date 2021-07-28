@@ -130,3 +130,5 @@ dmypy.json
 # Pyre type checker
 .pyre/
 website/database.db
+website/uploads/.DS_Store
+.DS_Store
