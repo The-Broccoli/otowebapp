@@ -5,8 +5,11 @@ from sqlalchemy.sql import func
 
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    data = db.Column(db.String(10000))
-    date = db.Column(db.DateTime(timezone=True), default=func.now())
+    title = db.Column(db.String(200))
+    post_type = db.Column(db.String(20))
+    file_name = db.Column(db.String(100))
+    description = db.Column(db.String(10000))
+    date = db.Column(db.String(15))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
 class User(db.Model, UserMixin):
