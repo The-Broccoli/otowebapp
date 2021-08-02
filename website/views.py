@@ -25,10 +25,6 @@ def home():
 @login_required
 def settings():
     if request.method == 'POST':
-        # TODO !!!!!!!!!!!
-        # it must still be tested whether such a file with this name 
-        # already exists, or whether this title already exists.
-
         # check if the post request has the file part
         if 'thumbnailFile' not in request.files and 'workFile' not in request.files:
             flash('No file part!', category='error')
@@ -54,13 +50,17 @@ def settings():
         wfile.filename = file_name
 
         # check if all information is correct
-        if len(title) < 5:
-            flash('please enter a correct title!', category='error')
+        for post in db.session.query(Post).all(): # does this entry already exist?
+            if post.title == title:
+                flash('There is already an entry with this title!', category='error')
+                return render_template('settings.html', user=current_user)
+        if len(title) < 4: # does the title have more than 4 characters?
+            flash('please enter a correct title! (more than 4 characters)', category='error')
             return render_template('settings.html', user=current_user)
-        if post_type == None:
+        if post_type == None: # one type was selected?
             flash('please select a type!', category='error')
             return render_template('settings.html', user=current_user)
-        if len(date) > 10:
+        if len(date) > 10: # has a correct date been given?
             flash('please enter a correct date!', category='error')
             return render_template('settings.html', user=current_user)
         else:
@@ -95,6 +95,7 @@ def delete_post():
                 os.remove(target)
                 os.remove(target + '_preview')
             except OSError as e:
+                flash(e, category='error')
                 print(e)
             # delete database entry
             db.session.delete(post)
