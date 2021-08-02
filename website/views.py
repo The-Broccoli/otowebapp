@@ -73,8 +73,7 @@ def settings():
             db.session.add(new_post)
             db.session.commit()
 
-            target = os.path.join(APP_ROOT, 'uploads/')
-            print("Couldn't create upload directory: {}".format(target))
+            target = os.path.join(APP_ROOT, 'static/uploads/')
             destination1 = "/".join([target, tfile.filename])
             tfile.save(destination1)
             destination2 = "/".join([target, wfile.filename])
@@ -90,6 +89,14 @@ def delete_post():
     post = Post.query.get(postId)
     if post:
         if post.user_id == current_user.id:
+            # delete image files
+            try:
+                target = os.path.join(APP_ROOT, 'static/uploads/') + post.file_name
+                os.remove(target)
+                os.remove(target + '_preview')
+            except OSError as e:
+                print(e)
+            # delete database entry
             db.session.delete(post)
             db.session.commit()
             return jsonify({})
