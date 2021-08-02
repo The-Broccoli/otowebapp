@@ -130,3 +130,7 @@ def gallery():
 def display_image(filename):
 	print('display_image filename: ' + filename)
 	return redirect(url_for('static', filename='uploads/' + filename), code=301)
+
+@views.route('/impressum')
+def impressum():
+    return render_template('impressum.html', user=current_user)
