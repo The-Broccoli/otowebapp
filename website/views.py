@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, flash, jsonify
+from flask import Blueprint, render_template, request, flash, jsonify, redirect, url_for
 from flask_login import login_required, current_user
 from .models import Post
 from . import db
@@ -82,9 +82,9 @@ def settings():
             db.session.commit()
 
             target = os.path.join(APP_ROOT, 'static/uploads/')
-            destination1 = "/".join([target, tfile.filename])
+            destination1 = "/".join([target, tfile.filename + '.jpg'])
             tfile.save(destination1)
-            destination2 = "/".join([target, wfile.filename])
+            destination2 = "/".join([target, wfile.filename + '.jpg'])
             wfile.save(destination2)
 
             flash('Seite added!', category='success')
@@ -115,10 +115,18 @@ def delete_post():
 def gallery():
     page = request.args.get('artwork', default=None, type=str)
     if page == None:
+        target = os.path.join(APP_ROOT, 'static/uploads/')
+        result = db.session.query(Post).all()
+        result.reverse()
         # the normal gallery is displayed here
-        return render_template('base.html', user=current_user)
+        return render_template('gallery.html', user=current_user, post_list=result, target=target)
     # under this "IF" must first be looked if this page exists
     # http://127.0.0.1:5000/gallery?artwork=test
     # after it has been checked the page can be displayed 
     # and also the view counter can be set high
     return '<h1>Hier kommt eine Seite hin für: ' + str(page) + '</h1>'
+
+@views.route('/display/<filename>')
+def display_image(filename):
+	print('display_image filename: ' + filename)
+	return redirect(url_for('static', filename='uploads/' + filename), code=301)

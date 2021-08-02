@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+<!-- BLOCK TITLE -->
+{% block title %}
+GALLERY
+{% endblock %}
+
+<!-- BLOCK KEYVISUAL -->
+{% block keyvisual %}
+<h1>GALLERY keyvisual</h1>
+{% endblock %}
+
+<!-- BLOCK CONTENT -->
+{% block content %}
+<span class="post-container">
+    {% for p in post_list %}
+        <div>
+            <img src="{{ 'static/uploads/' + p.file_name + '_preview.jpg'}}"><br>
+            {{ p.title }}
+            {{ p.date }}
+            {{ p.user_id}}
+        </div>
+        <br>
+    {% endfor %}
+</span>
+{% endblock %}
