@@ -36,7 +36,15 @@ def settings():
         if tfile.filename == '' and wfile.filename == '':
             flash('No selected file', category='error')
             return render_template('settings.html', user=current_user)
-        
+
+        # the file type is checked here
+        if not allowed_file(tfile.filename) or not allowed_file(wfile.filename):
+            if allowed_file(tfile.filename) == False:
+                flash('thumbnail wrong file type', category='error')
+            if allowed_file(wfile.filename) == False:
+                flash('workFile wrong file type', category='error')
+            return render_template('settings.html', user=current_user)
+
         # the data are stored in variables
         title = request.form.get('title')
         post_type = request.form.get('postType')
