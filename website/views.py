@@ -99,10 +99,10 @@ def delete_post():
 def gallery():
     page = request.args.get('artwork', default=None, type=str)
     if page == None:
-        # here comes the normal gallery
+        # the normal gallery is displayed here
         return render_template('base.html', user=current_user)
     # under this "IF" must first be looked if this page exists
     # http://127.0.0.1:5000/gallery?artwork=test
     # after it has been checked the page can be displayed 
     # and also the view counter can be set high
-    return str(page)
+    return '<h1>Hier kommt eine Seite hin für: ' + str(page) + '</h1>'
