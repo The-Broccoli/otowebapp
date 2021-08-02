@@ -7,7 +7,7 @@ import os
 
 views = Blueprint('views', __name__)
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
-ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
+ALLOWED_EXTENSIONS = set(['jpg', 'jpeg'])
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -100,8 +100,8 @@ def delete_post():
             # delete image files
             try:
                 target = os.path.join(APP_ROOT, 'static/uploads/') + post.file_name
-                os.remove(target)
-                os.remove(target + '_preview')
+                os.remove(target + '.jpg')
+                os.remove(target + '_preview.jpg')
             except OSError as e:
                 flash(e, category='error')
                 print(e)

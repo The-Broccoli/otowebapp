@@ -15,7 +15,9 @@ GALLERY
 <span class="post-container">
     {% for p in post_list %}
         <div>
-            <img src="{{ 'static/uploads/' + p.file_name + '_preview.jpg'}}"><br>
+            <a href="gallery?artwork={{ p.title }}">
+                <img src="{{ 'static/uploads/' + p.file_name + '_preview.jpg'}}" alt="{{ 'a picture of ' + p.title }}"><br>
+            </a>
             {{ p.title }}
             {{ p.date }}
             {{ p.user_id}}
