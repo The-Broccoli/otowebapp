@@ -1,9 +1,10 @@
 from flask import Blueprint, render_template, request, flash, jsonify, redirect, url_for
 from flask_login import login_required, current_user
-from .models import Post
+from .models import Post, User
 from . import db
 import json
 import os
+import collections
 
 views = Blueprint('views', __name__)
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -49,7 +50,10 @@ def settings():
         title = request.form.get('title')
         post_type = request.form.get('postType')
         description = request.form.get('description')
+        user_name = current_user.first_name
         date = request.form.get('date')
+        date = int(date.replace('-', ''))
+
 
         # the files must be renamed for security purposes
         file_name = title.lower()
@@ -68,7 +72,7 @@ def settings():
         if post_type == None: # one type was selected?
             flash('please select a type!', category='error')
             return render_template('settings.html', user=current_user)
-        if len(date) > 10: # has a correct date been given?
+        if date > 20500000: # has a correct date been given?
             flash('please enter a correct date!', category='error')
             return render_template('settings.html', user=current_user)
         else:
@@ -77,7 +81,8 @@ def settings():
                             file_name = file_name, 
                             description = description, 
                             date = date, 
-                            user_id=current_user.id)
+                            user_id=current_user.id,
+                            user_name = user_name)
             db.session.add(new_post)
             db.session.commit()
 
@@ -117,14 +122,19 @@ def gallery():
     if page == None:
         target = os.path.join(APP_ROOT, 'static/uploads/')
         result = db.session.query(Post).all()
-        result.reverse()
+        __dict = {}
+        for post in result:
+            __dict[post.date] = post
+        # sort by date
+        post_list = collections.OrderedDict(sorted(__dict.items(), reverse=True))
         # the normal gallery is displayed here
-        return render_template('gallery.html', user=current_user, post_list=result, target=target)
-    # under this "IF" must first be looked if this page exists
-    # http://127.0.0.1:5000/gallery?artwork=test
-    # after it has been checked the page can be displayed 
-    # and also the view counter can be set high
-    return '<h1>Hier kommt eine Seite hin für: ' + str(page) + '</h1>'
+        return render_template('gallery.html', user=current_user, post_list=post_list, target=target)
+    result = db.session.query(Post).all()
+    for post in result:
+        if post.title == page:
+            return render_template('portfolio_entry.html', user=current_user, post=post)
+    # if this page does not exist
+    return render_template('blank_page.html', user=current_user, mes=str(page))
 
 @views.route('/display/<filename>')
 def display_image(filename):

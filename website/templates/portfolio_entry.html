@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+<!-- BLOCK TITLE -->
+{% block title %}
+GALLERY - {{ post.title }}
+{% endblock %}
+
+<!-- BLOCK KEYVISUAL -->
+{% block keyvisual %}
+<h1>keyvisual</h1>
+{% endblock %}
+
+<!-- BLOCK CONTENT -->
+{% block content %}
+{{ post.title }}
+
+<div>
+    <img src="{{ 'static/uploads/' + post.file_name + '.jpg'}}" alt="{{ 'a picture of ' + post.title }}"><br>
+    Title: {{ post.title }}<br>
+    {% set date = post.date|string %}
+    Date: {{ date[6:8] }} {{ date[4:6] }} {{ date[0:4] }} <br>
+    User: {{ post.user_name }}<br>
+</div>
+{% endblock %}
+
+<!-- BLOCK FOOTER-IMG -->
+{% block footerBar %}
+footerBar
+{% endblock %}

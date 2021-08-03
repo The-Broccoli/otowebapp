@@ -13,14 +13,15 @@ GALLERY
 <!-- BLOCK CONTENT -->
 {% block content %}
 <span class="post-container">
-    {% for p in post_list %}
+    {% for d, p in post_list.items() %}
         <div>
             <a href="gallery?artwork={{ p.title }}">
                 <img src="{{ 'static/uploads/' + p.file_name + '_preview.jpg'}}" alt="{{ 'a picture of ' + p.title }}"><br>
             </a>
-            {{ p.title }}
-            {{ p.date }}
-            {{ p.user_id}}
+            Title: {{ p.title }}<br>
+            {% set date = p.date|string %}
+            Date: {{ date[6:8] }} {{ date[4:6] }} {{ date[0:4] }} <br>
+            User: {{ p.user_name }}<br>
         </div>
         <br>
     {% endfor %}
