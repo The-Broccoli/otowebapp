@@ -49,13 +49,17 @@ SETTINGS
 
 <h1>Content List</h1>
 <ul id="content-list">
-    {% for post in user.post %}
-        <li>
-            <button type="button" class="close" onClick="deletePost({{ post.id }})">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            {{ post.title }}
-        </li>
-    {% endfor %}
+    {% if user.post %}
+        {% for post in user.post %}
+            <li>
+                <button type="button" class="close" onClick="deletePost({{ post.id }})">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                {{ post.title }}
+            </li>
+        {% endfor %}
+    {% else %}
+        <b>there are no entries &#128531;</b>
+    {% endif%}
 </ul>
 {% endblock %}

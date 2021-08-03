@@ -22,18 +22,22 @@ Home
 
 <h2>The last releases</h2>
 <span class="post-container">
-    {% for p in dbpost %}
-        <div>
-            <a href="gallery?artwork={{ p[1].title }}">
-                <img src="{{ 'static/uploads/' + p[1].file_name + '_preview.jpg'}}" alt="{{ 'a picture of ' + p[1].title }}"><br>
-            </a>
-            Title: {{ p[1].title }}<br>
-            {% set date = p[1].date|string %}
-            Date: {{ date[6:8] }} {{ date[4:6] }} {{ date[0:4] }}<br>
-            User: {{ p[1].user_name }}<br>
-            post_type: {{ p[1].post_type }}
-        </div>
-    {% endfor %}
+    {% if dbpost %}
+        {% for p in dbpost %}
+            <div>
+                <a href="gallery?artwork={{ p[1].title }}">
+                    <img src="{{ 'static/uploads/' + p[1].file_name + '_preview.jpg'}}" alt="{{ 'a picture of ' + p[1].title }}"><br>
+                </a>
+                Title: {{ p[1].title }}<br>
+                {% set date = p[1].date|string %}
+                Date: {{ date[6:8] }} {{ date[4:6] }} {{ date[0:4] }}<br>
+                User: {{ p[1].user_name }}<br>
+                post_type: {{ p[1].post_type }}
+            </div>
+        {% endfor %}
+    {% else %}
+        <b>there are no entries &#128531;</b>
+    {% endif%}
 </span>
 {% endblock %}
 

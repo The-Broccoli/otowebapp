@@ -12,6 +12,7 @@ class Post(db.Model):
     date = db.Column(db.Integer)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     user_name =db.Column(db.String(200))
+    views_counter = db.Column(db.Integer)
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)

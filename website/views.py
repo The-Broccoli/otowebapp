@@ -17,18 +17,21 @@ def allowed_file(filename):
 @views.route('/', methods=['GET'])
 def home():
     if request.method == 'GET':
-        result = db.session.query(Post).all() # retrieves all POST elements in the database
-        __dict = {}
-        for post in result:
-            __dict[post.date] = post
-        # sort by date
-        post_list = collections.OrderedDict(sorted(__dict.items(), reverse=True))
-        counter = 0
-        dbpost = []
-        for p in post_list.items():
-            if counter < 4:
-                dbpost.append(p)
-                counter = counter + 1
+        try:
+            result = db.session.query(Post).all() # retrieves all POST elements in the database
+            __dict = {}
+            for post in result:
+                __dict[post.date] = post
+            # sort by date
+            post_list = collections.OrderedDict(sorted(__dict.items(), reverse=True))
+            counter = 0
+            dbpost = []
+            for p in post_list.items():
+                if counter < 4:
+                    dbpost.append(p)
+                    counter = counter + 1
+        except:
+            dbpost = None
     return render_template('home.html', user=current_user, dbpost=dbpost)
 
 @views.route('/settings', methods=['GET', 'POST'])
@@ -91,7 +94,8 @@ def settings():
                             description = description, 
                             date = date, 
                             user_id=current_user.id,
-                            user_name = user_name)
+                            user_name = user_name,
+                            views_counter = 0)
             db.session.add(new_post)
             db.session.commit()
 
@@ -141,6 +145,8 @@ def gallery():
     result = db.session.query(Post).all()
     for post in result:
         if post.title == page:
+            post.views_counter = post.views_counter + 1
+            db.session.commit()
             return render_template('portfolio_entry.html', user=current_user, post=post)
     # if this page does not exist
     return render_template('blank_page.html', user=current_user, mes=str(page))
