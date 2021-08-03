@@ -20,13 +20,19 @@ Home
 <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
 <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
 
-<p>Test Content</p>
+<h2>The last releases</h2>
 <span class="post-container">
     {% for p in dbpost %}
         <div>
-            {{ p.title }}
+            <a href="gallery?artwork={{ p[1].title }}">
+                <img src="{{ 'static/uploads/' + p[1].file_name + '_preview.jpg'}}" alt="{{ 'a picture of ' + p[1].title }}"><br>
+            </a>
+            Title: {{ p[1].title }}<br>
+            {% set date = p[1].date|string %}
+            Date: {{ date[6:8] }} {{ date[4:6] }} {{ date[0:4] }}<br>
+            User: {{ p[1].user_name }}<br>
+            post_type: {{ p[1].post_type }}
         </div>
-        <br>
     {% endfor %}
 </span>
 {% endblock %}

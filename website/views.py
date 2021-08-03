@@ -18,9 +18,18 @@ def allowed_file(filename):
 def home():
     if request.method == 'GET':
         result = db.session.query(Post).all() # retrieves all POST elements in the database
-        result.reverse() # rotates the list so that the last entries are at the front
-        result = result[0:4] # we save only the first 4 results in the list
-    return render_template('home.html', user=current_user, dbpost=result)
+        __dict = {}
+        for post in result:
+            __dict[post.date] = post
+        # sort by date
+        post_list = collections.OrderedDict(sorted(__dict.items(), reverse=True))
+        counter = 0
+        dbpost = []
+        for p in post_list.items():
+            if counter < 4:
+                dbpost.append(p)
+                counter = counter + 1
+    return render_template('home.html', user=current_user, dbpost=dbpost)
 
 @views.route('/settings', methods=['GET', 'POST'])
 @login_required
@@ -72,7 +81,7 @@ def settings():
         if post_type == None: # one type was selected?
             flash('please select a type!', category='error')
             return render_template('settings.html', user=current_user)
-        if date > 20500000: # has a correct date been given?
+        if date > 20500000: # date must be before 2050
             flash('please enter a correct date!', category='error')
             return render_template('settings.html', user=current_user)
         else:
@@ -121,7 +130,7 @@ def gallery():
     page = request.args.get('artwork', default=None, type=str)
     if page == None:
         target = os.path.join(APP_ROOT, 'static/uploads/')
-        result = db.session.query(Post).all()
+        result = db.session.query(Post).all() # retrieves all POST elements in the database
         __dict = {}
         for post in result:
             __dict[post.date] = post

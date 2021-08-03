@@ -22,8 +22,8 @@ GALLERY
             {% set date = p.date|string %}
             Date: {{ date[6:8] }} {{ date[4:6] }} {{ date[0:4] }} <br>
             User: {{ p.user_name }}<br>
+            post_type: {{ p.post_type }}
         </div>
-        <br>
     {% endfor %}
 </span>
 {% endblock %}
