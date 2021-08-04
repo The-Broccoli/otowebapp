@@ -129,25 +129,26 @@ def delete_post():
             return jsonify({})
     return jsonify({})
 
-@views.route('/gallery')
+@views.route('/gallery', methods=['GET'])
 def gallery():
-    page = request.args.get('artwork', default=None, type=str)
-    if page == None:
-        target = os.path.join(APP_ROOT, 'static/uploads/')
-        result = db.session.query(Post).all() # retrieves all POST elements in the database
-        __dict = {}
+    if request.method == 'GET':
+        page = request.args.get('artwork', default=None, type=str)
+        if page == None:
+            target = os.path.join(APP_ROOT, 'static/uploads/')
+            result = db.session.query(Post).all() # retrieves all POST elements in the database
+            __dict = {}
+            for post in result:
+                __dict[post.date] = post
+            # sort by date
+            post_list = collections.OrderedDict(sorted(__dict.items(), reverse=True))
+            # the normal gallery is displayed here
+            return render_template('gallery.html', user=current_user, post_list=post_list, target=target)
+        result = db.session.query(Post).all()
         for post in result:
-            __dict[post.date] = post
-        # sort by date
-        post_list = collections.OrderedDict(sorted(__dict.items(), reverse=True))
-        # the normal gallery is displayed here
-        return render_template('gallery.html', user=current_user, post_list=post_list, target=target)
-    result = db.session.query(Post).all()
-    for post in result:
-        if post.title == page:
-            post.views_counter = post.views_counter + 1
-            db.session.commit()
-            return render_template('portfolio_entry.html', user=current_user, post=post)
+            if post.title == page:
+                post.views_counter = post.views_counter + 1
+                db.session.commit()
+                return render_template('portfolio_entry.html', user=current_user, post=post)
     # if this page does not exist
     return render_template('blank_page.html', user=current_user, mes=str(page))
 

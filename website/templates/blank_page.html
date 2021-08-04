@@ -12,7 +12,13 @@ Page not found
 
 <!-- BLOCK CONTENT -->
 {% block content %}
-<h1>Page "{{ mes }}" was not found :'(</h1>
+{% if mes %}
+    <h1 style="display: flex; align-items: center; justify-content: center;">404 OOPS!</h1>
+    <p style="display: flex; align-items: center; justify-content: center;">Page "{{ mes }}" was not found (╯︵╰,)</p>
+{% else %}
+    <h1 style="display: flex; align-items: center; justify-content: center;">404 OOPS!</h1>
+    <p style="display: flex; align-items: center; justify-content: center;">who told you how to get here? ಠ_ಠ</p>
+{% endif %}
 {% endblock %}
 
 <!-- BLOCK FOOTER-IMG -->
