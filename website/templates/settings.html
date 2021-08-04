@@ -16,15 +16,15 @@ SETTINGS
 <form method="POST" enctype="multipart/form-data">
     <!-- x -->
     <label for="title">Title:</label><br>
-    <input type="text" id="title" name="title"><br>
+    <input type="text" id="title" name="title" placeholder="Enter the Post-Title" required><br>
     <!-- x -->
     <label for="thumbnailFile">thumbnail file:</label>
-    <input type="file" id="thumbnailFile" name="thumbnailFile"><br>
+    <input type="file" id="thumbnailFile" name="thumbnailFile" required><br>
     <!-- x -->
     <label for="workFile">work file:</label>
     <input type="file" id="workFile" name="workFile"><br>
     <!-- x -->
-    <p>Choose your POST type</p>
+    <p>Choose your Post type</p>
     <input type="radio" id="logo" name="postType" value="logo">
     <label for="logo">Logo</label><br>
     <input type="radio" id="icon" name="postType" value="icon">
@@ -35,12 +35,12 @@ SETTINGS
     <label for="dev">Development</label><br>
     <!-- x -->
     <p>Description</p>
-    <textarea name="description" id="description">
+    <textarea name="description" id="description" placeholder="Describe your work" required>
     </textarea><br>
     <!-- x -->
     <p>Date of creation</p>
     <label for="date">Date:</label>
-    <input type="date" id="date" name="date"><br>
+    <input type="date" id="date" name="date" required><br>
 
     <div>
         <button type="submit">Add Content</button>
@@ -55,7 +55,7 @@ SETTINGS
                 <button type="button" class="close" onClick="deletePost({{ post.id }})">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                {{ post.title }}
+                {{ post.title }} // Views: {{ post.views_counter}}
             </li>
         {% endfor %}
     {% else %}
