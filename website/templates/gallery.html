@@ -17,7 +17,7 @@ GALLERY
         {% for d, p in post_list.items() %}
             <div>
                 <a href="gallery?artwork={{ p.title }}">
-                    <img src="{{ 'static/uploads/' + p.file_name + '_preview.jpg'}}" alt="{{ 'a picture of ' + p.title }}"><br>
+                    <img src="{{ 'static/uploads/' + p.file_name + '_preview.png'}}" alt="{{ 'a picture of ' + p.title }}"><br>
                 </a>
                 Title: {{ p.title }}<br>
                 {% set date = p.date|string %}

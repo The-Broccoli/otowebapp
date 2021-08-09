@@ -15,7 +15,7 @@ GALLERY - {{ post.title }}
     {% if post %}
         {{ post.title }}
         <div>
-            <img src="{{ 'static/uploads/' + post.file_name + '.jpg'}}" alt="{{ 'a picture of ' + post.title }}"><br>
+            <img src="{{ 'static/uploads/' + post.file_name + '.png'}}" alt="{{ 'a picture of ' + post.title }}"><br>
             Title: {{ post.title }}<br>
             {% set date = post.date|string %}
             Date: {{ date[6:8] }} {{ date[4:6] }} {{ date[0:4] }} <br>

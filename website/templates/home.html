@@ -26,7 +26,7 @@ Home
         {% for p in dbpost %}
             <div>
                 <a href="gallery?artwork={{ p[1].title }}">
-                    <img src="{{ 'static/uploads/' + p[1].file_name + '_preview.jpg'}}" alt="{{ 'a picture of ' + p[1].title }}"><br>
+                    <img src="{{ 'static/uploads/' + p[1].file_name + '_preview.png'}}" alt="{{ 'a picture of ' + p[1].title }}"><br>
                 </a>
                 Title: {{ p[1].title }}<br>
                 {% set date = p[1].date|string %}

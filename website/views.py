@@ -8,7 +8,7 @@ import collections
 
 views = Blueprint('views', __name__)
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
-ALLOWED_EXTENSIONS = set(['jpg', 'jpeg'])
+ALLOWED_EXTENSIONS = set(['png'])
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -100,9 +100,9 @@ def settings():
             db.session.commit()
 
             target = os.path.join(APP_ROOT, 'static/uploads/')
-            destination1 = "/".join([target, tfile.filename + '.jpg'])
+            destination1 = "/".join([target, tfile.filename + '.png'])
             tfile.save(destination1)
-            destination2 = "/".join([target, wfile.filename + '.jpg'])
+            destination2 = "/".join([target, wfile.filename + '.png'])
             wfile.save(destination2)
 
             flash('Seite added!', category='success')
