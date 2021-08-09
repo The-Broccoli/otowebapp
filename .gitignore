@@ -132,3 +132,4 @@ dmypy.json
 website/database.db
 website/uploads/.DS_Store
 .DS_Store
+*.png
