@@ -55,7 +55,10 @@ SETTINGS
                 <button type="button" class="close" onClick="deletePost({{ post.id }})">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                {{ post.title }} // Views: {{ post.views_counter}}
+                <a href="gallery?artwork={{ post.title }}">
+                    {{ post.title }} 
+                </a>
+                // Views: {{ post.views_counter}}
             </li>
         {% endfor %}
     {% else %}
