@@ -118,8 +118,8 @@ def delete_post():
             # delete image files
             try:
                 target = os.path.join(APP_ROOT, 'static/uploads/') + post.file_name
-                os.remove(target + '.jpg')
-                os.remove(target + '_preview.jpg')
+                os.remove(target + '.png')
+                os.remove(target + '_preview.png')
             except OSError as e:
                 flash(e, category='error')
                 print(e)
