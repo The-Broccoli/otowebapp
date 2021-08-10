@@ -14,9 +14,12 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-def all_post():
+def all_post(cUser = None):
     # this function takes all database entries from POST and sorts them by date 
-    result = db.session.query(Post).all() # retrieves all POST elements in the database
+    if cUser == None:
+        result = db.session.query(Post).all() # retrieves all POST elements in the database
+    if cUser:
+        result = cUser.post
     sort_list = []
     # he sort_list is filled with the database content
     # sort_list [[STR 2021-01-01, CLASS post],
@@ -34,6 +37,7 @@ def all_post():
     post_list.reverse()
     return post_list
 
+
 @views.route('/', methods=['GET'])
 def home():
     if request.method == 'GET':
@@ -47,18 +51,22 @@ def home():
 @views.route('/settings', methods=['GET', 'POST'])
 @login_required
 def settings():
+    try:
+        post_list = all_post(current_user)
+    except:
+        post_list = None
     if request.method == 'POST':
         # check if the post request has the file part
         if 'thumbnailFile' not in request.files and 'workFile' not in request.files:
             flash('No file part!', category='error')
-            return render_template('settings.html', user=current_user)
+            return render_template('settings.html', user=current_user, post_list=post_list)
         tfile = request.files['thumbnailFile']
         wfile = request.files['workFile']
         # if user does not select file, browser also
         # submit a empty part without filename
         if tfile.filename == '' and wfile.filename == '':
             flash('No selected file', category='error')
-            return render_template('settings.html', user=current_user)
+            return render_template('settings.html', user=current_user, post_list=post_list)
 
         # the file type is checked here
         if not allowed_file(tfile.filename) or not allowed_file(wfile.filename):
@@ -66,7 +74,7 @@ def settings():
                 flash('thumbnail wrong file type', category='error')
             if allowed_file(wfile.filename) == False:
                 flash('workFile wrong file type', category='error')
-            return render_template('settings.html', user=current_user)
+            return render_template('settings.html', user=current_user, post_list=post_list)
 
         # the data are stored in variables
         title = request.form.get('title')
@@ -87,16 +95,16 @@ def settings():
         for post in db.session.query(Post).all(): # does this entry already exist?
             if post.title == title:
                 flash('There is already an entry with this title!', category='error')
-                return render_template('settings.html', user=current_user)
+                return render_template('settings.html', user=current_user, post_list=post_list)
         if len(title) < 4: # does the title have more than 4 characters?
             flash('please enter a correct title! (more than 4 characters)', category='error')
-            return render_template('settings.html', user=current_user)
+            return render_template('settings.html', user=current_user, post_list=post_list)
         if post_type == None: # one type was selected?
             flash('please select a type!', category='error')
-            return render_template('settings.html', user=current_user)
+            return render_template('settings.html', user=current_user, post_list=post_list)
         if date > 20500000: # date must be before 2050
             flash('please enter a correct date!', category='error')
-            return render_template('settings.html', user=current_user)
+            return render_template('settings.html', user=current_user, post_list=post_list)
         else:
             new_post = Post(title=title,
                             post_type = post_type,
@@ -116,7 +124,7 @@ def settings():
             wfile.save(destination2)
 
             flash('Seite added!', category='success')
-    return render_template('settings.html', user=current_user)
+    return render_template('settings.html', user=current_user, post_list=post_list)
 
 @views.route('/delete-post', methods=['POST'])
 def delete_post():
@@ -143,14 +151,24 @@ def delete_post():
 def gallery():
     if request.method == 'GET':
         page = request.args.get('artwork', default=None, type=str)
+        pageId = request.args.get('page', default=None, type=int)
+        if pageId:
+            endRange = 8 * pageId
+            startRange = (8 * pageId) - 8
+            print(str(startRange) + ' ' + str(endRange))
+            try:
+                post_list = all_post()
+                post_list = post_list[startRange:endRange]
+            except:
+                post_list = None
+            return render_template('gallery.html', user=current_user, post_list=post_list)
         if page == None:
-            target = os.path.join(APP_ROOT, 'static/uploads/')
             try:
                 post_list = all_post()
             except:
                 post_list = None
             # the normal gallery is displayed here
-            return render_template('gallery.html', user=current_user, post_list=post_list, target=target)
+            return render_template('gallery.html', user=current_user, post_list=post_list)
         result = db.session.query(Post).all()
         for post in result:
             if post.title == page:
