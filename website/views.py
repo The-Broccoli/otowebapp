@@ -4,7 +4,7 @@ from .models import Post, User
 from . import db
 import json
 import os
-import collections
+from datetime import datetime
 
 views = Blueprint('views', __name__)
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -14,25 +14,35 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+def all_post():
+    # this function takes all database entries from POST and sorts them by date 
+    result = db.session.query(Post).all() # retrieves all POST elements in the database
+    sort_list = []
+    # he sort_list is filled with the database content
+    # sort_list [[STR 2021-01-01, CLASS post],
+    #            [STR 2021-01-01, CLASS post]]
+    for post in result:
+        time = str(post.date)
+        test = str(time[:4]) + '-' + str(time[4:6]) + '-' + str(time[6:8])
+        sort_list.append([test,post])
+    # sort by date
+    sort_list.sort(key=lambda tup: datetime.strptime(tup[0], "%Y-%m-%d"))
+    # The outer list is now removed, that only the POST classes are in a list
+    post_list = []
+    for p in sort_list:
+        post_list.append(p[1])
+    post_list.reverse()
+    return post_list
+
 @views.route('/', methods=['GET'])
 def home():
     if request.method == 'GET':
         try:
-            result = db.session.query(Post).all() # retrieves all POST elements in the database
-            __dict = {}
-            for post in result:
-                __dict[post.date] = post
-            # sort by date
-            post_list = collections.OrderedDict(sorted(__dict.items(), reverse=True))
-            counter = 0
-            dbpost = []
-            for p in post_list.items():
-                if counter < 4:
-                    dbpost.append(p)
-                    counter = counter + 1
+            post_list = all_post()
+            post_list = post_list[:4]
         except:
-            dbpost = None
-    return render_template('home.html', user=current_user, dbpost=dbpost)
+            post_list = None
+    return render_template('home.html', user=current_user, post_list=post_list)
 
 @views.route('/settings', methods=['GET', 'POST'])
 @login_required
@@ -135,12 +145,10 @@ def gallery():
         page = request.args.get('artwork', default=None, type=str)
         if page == None:
             target = os.path.join(APP_ROOT, 'static/uploads/')
-            result = db.session.query(Post).all() # retrieves all POST elements in the database
-            __dict = {}
-            for post in result:
-                __dict[post.date] = post
-            # sort by date
-            post_list = collections.OrderedDict(sorted(__dict.items(), reverse=True))
+            try:
+                post_list = all_post()
+            except:
+                post_list = None
             # the normal gallery is displayed here
             return render_template('gallery.html', user=current_user, post_list=post_list, target=target)
         result = db.session.query(Post).all()

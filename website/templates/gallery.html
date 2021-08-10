@@ -17,47 +17,47 @@ GALLERY
 
 <!-- BLOCK CONTENT -->
 {% block content %}
-{% if post_list %}
-    <div class="post-container">
-        {% for d, p in post_list.items() %}
-            <div>
-                <a href="gallery?artwork={{ p.title }}">
-                    <img src="{{ 'static/uploads/' + p.file_name + '_preview.png'}}" alt="{{ 'a picture of ' + p.title }}"><br>
-                </a>
-                {% if p.post_type == "logo"%}
-                    <div class="circle-logo">
+    {% if post_list %}
+        <div class="post-grid">
+            {% for p in post_list %}
+                <div class="post-container">
+                    <a href="gallery?artwork={{ p.title }}">
+                        <img src="{{ 'static/uploads/' + p.file_name + '_preview.png'}}" alt="{{ 'a picture of ' + p.title }}"><br>
+                    </a>
+                    {% if p.post_type == "logo"%}
+                        <div class="circle-logo">
+                        </div>
+                    {% endif%}
+                    {% if p.post_type == "icon"%}
+                        <div class="circle-icon">
+                        </div>
+                    {% endif%}
+                    {% if p.post_type == "websites"%}
+                        <div class="circle-websites">
+                        </div>
+                    {% endif%}
+                    {% if p.post_type == "dev"%}
+                        <div class="circle-dev">
+                        </div>
+                    {% endif%}
+                    <div class="title-box">
+                        <div class="title">
+                            {{ p.title }}<br>
+                        </div>
+                        <div class="title-user">
+                            {{ p.user_name }}
+                        </div>
                     </div>
-                {% endif%}
-                {% if p.post_type == "icon"%}
-                    <div class="circle-icon">
+                    <div class="views-box">
+                        {{ p.views_counter}}
                     </div>
-                {% endif%}
-                {% if p.post_type == "websites"%}
-                    <div class="circle-websites">
-                    </div>
-                {% endif%}
-                {% if p.post_type == "dev"%}
-                    <div class="circle-dev">
-                    </div>
-                {% endif%}
-                <div class="title-box">
-                    <div class="title">
-                        {{ p.title }}<br>
-                    </div>
-                    <div class="title-user">
-                        {{ p.user_name }}
-                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#B9B9B9"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 6c3.79 0 7.17 2.13 8.82 5.5C19.17 14.87 15.79 17 12 17s-7.17-2.13-8.82-5.5C4.83 8.13 8.21 6 12 6m0-2C7 4 2.73 7.11 1 11.5 2.73 15.89 7 19 12 19s9.27-3.11 11-7.5C21.27 7.11 17 4 12 4zm0 5c1.38 0 2.5 1.12 2.5 2.5S13.38 14 12 14s-2.5-1.12-2.5-2.5S10.62 9 12 9m0-2c-2.48 0-4.5 2.02-4.5 4.5S9.52 16 12 16s4.5-2.02 4.5-4.5S14.48 7 12 7z"/></svg>
                 </div>
-                <div class="views-box">
-                    {{ p.views_counter}}
-                </div>
-                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#B9B9B9"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 6c3.79 0 7.17 2.13 8.82 5.5C19.17 14.87 15.79 17 12 17s-7.17-2.13-8.82-5.5C4.83 8.13 8.21 6 12 6m0-2C7 4 2.73 7.11 1 11.5 2.73 15.89 7 19 12 19s9.27-3.11 11-7.5C21.27 7.11 17 4 12 4zm0 5c1.38 0 2.5 1.12 2.5 2.5S13.38 14 12 14s-2.5-1.12-2.5-2.5S10.62 9 12 9m0-2c-2.48 0-4.5 2.02-4.5 4.5S9.52 16 12 16s4.5-2.02 4.5-4.5S14.48 7 12 7z"/></svg>
-            </div>
-        {% endfor %}
-    </div>
-{% else %}
-    <b>there are no entries &#128531;</b>
-{% endif%}
+            {% endfor %}
+        </div>
+    {% else %}
+        <b>there are no entries &#128531;</b>
+    {% endif%}
 {% endblock %}
 
 <!-- BLOCK FOOTER-IMG -->
