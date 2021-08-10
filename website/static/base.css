@@ -87,6 +87,16 @@ footer {
     background: linear-gradient(45deg, #278A3E, #37C559, #B9EEC6);
 }
 
+/* ----------------- error setting -------------------- */
+.error h1{
+    font-size: 80px;
+}
+
+.error p{
+    font-size: 20px;
+    margin-top: 0;
+}
+
 /* -------------------- grid setting ---------------------- */
 /* -------------------------------------------------------- */
 /* MOBILE - 0-430px */

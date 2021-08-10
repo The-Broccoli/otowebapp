@@ -13,11 +13,15 @@
 <!-- BLOCK CONTENT -->
 {% block content %}
 {% if mes %}
-    <h1 style="display: flex; align-items: center; justify-content: center;">404 OOPS!</h1>
-    <p style="display: flex; align-items: center; justify-content: center;">Page "{{ mes }}" was not found (╯︵╰,)</p>
+    <div class="error">
+        <h1 style="display: flex; align-items: center; justify-content: center;">404 OOPS!</h1>
+        <p style="display: flex; align-items: center; justify-content: center;">Page "{{ mes }}" was not found (╯︵╰,)</p>
+    </div>
 {% else %}
-    <h1 style="display: flex; align-items: center; justify-content: center;">404 OOPS!</h1>
-    <p style="display: flex; align-items: center; justify-content: center;">who told you how to get here? ಠ_ಠ</p>
+    <div class="error">
+        <h1 style="display: flex; align-items: center; justify-content: center;">404 OOPS!</h1>
+        <p style="display: flex; align-items: center; justify-content: center;">who told you how to get here? ಠ_ಠ</p>
+    </div>
 {% endif %}
 {% endblock %}
 
