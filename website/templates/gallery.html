@@ -56,19 +56,21 @@ GALLERY
                 </div>
             {% endfor %}
         </div>
-        {% if page_list %}
-            {% for p in range(page_list) %}
-                {% if p + 1 == current_page_id %}
-                    <button type="button" class="current_page_button" onclick="location.href='/gallery?page={{ p + 1 }}'">
-                        {{ p + 1 }}
-                    </button>
-                {% else %}
-                    <button type="button" class="page_button" onclick="location.href='/gallery?page={{ p + 1 }}'">
-                        {{ p + 1 }}
-                    </button>
-                {% endif %}
-            {% endfor %}
-        {% endif %}
+        <div class="page_buttons_container">
+            {% if page_list %}
+                {% for p in range(page_list) %}
+                    {% if p + 1 == current_page_id %}
+                        <button type="button" class="current_page_button">
+                            {{ p + 1 }}
+                        </button>
+                    {% else %}
+                        <button type="button" class="page_button" onclick="location.href='/gallery?page={{ p + 1 }}'">
+                            {{ p + 1 }}
+                        </button>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        </div>
     {% else %}
         <b>there are no entries &#128531;</b>
     {% endif %}

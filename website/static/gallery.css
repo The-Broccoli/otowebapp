@@ -1,21 +1,37 @@
+.page_buttons_container{
+    margin-top: 20px;
+    margin-bottom: 50px;
+    display: flex;
+    justify-content: center;
+}
+
 .page_button{
+	text-decoration:none;
+    padding:12px 14px;
+    font-size:12px;
+    border-radius: 50%;
+    cursor:pointer;
+    font-weight:bold;
     border: none;
-    color: black;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    background-color: #e7e7e7;
+    background-color: #FAFAFA;
 }
 
 .current_page_button{
+    color:#ffffff;
+    text-decoration:none;
+    padding:12px 14px;
+    font-size:12px;
+	background-image: linear-gradient(315deg, #77f46b 0%, #39e12a 100%);
+	border-radius: 50%;
+	font-weight:bold;
     border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    background-color: #4CAF50;   
+}
+
+.page_button:hover {
+    color:#ffffff;
+	background-image: linear-gradient(315deg, #77f46b 0%, #39e12a 100%);
+}
+.page_button:active {
+	position:relative;
+	top:1px;
 }
