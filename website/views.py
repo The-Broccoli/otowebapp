@@ -178,12 +178,8 @@ def gallery():
                                                 page_list=page_list, 
                                                 current_page_id= pageId)
         if page == None:
-            try:
-                post_list = all_post()
-            except:
-                post_list = None
-            # the normal gallery is displayed here
-            return render_template('gallery.html', user=current_user, post_list=post_list)
+            # redirect the user to the gallery with the agument 'page=1'
+            return redirect(url_for('views.gallery', page='1'))
         if page:
             result = db.session.query(Post).all()
             for post in result:
