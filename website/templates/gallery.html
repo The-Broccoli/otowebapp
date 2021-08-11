@@ -8,6 +8,7 @@ GALLERY
 <!-- BLOCK LINK -->
 {% block link %}
 <link rel="stylesheet" href="{{ url_for('static', filename='post-container.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='gallery.css') }}">
 {% endblock %}
 
 <!-- BLOCK KEYVISUAL -->
@@ -55,9 +56,22 @@ GALLERY
                 </div>
             {% endfor %}
         </div>
+        {% if page_list %}
+            {% for p in range(page_list) %}
+                {% if p + 1 == current_page_id %}
+                    <button type="button" class="current_page_button" onclick="location.href='/gallery?page={{ p + 1 }}'">
+                        {{ p + 1 }}
+                    </button>
+                {% else %}
+                    <button type="button" class="page_button" onclick="location.href='/gallery?page={{ p + 1 }}'">
+                        {{ p + 1 }}
+                    </button>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
     {% else %}
         <b>there are no entries &#128531;</b>
-    {% endif%}
+    {% endif %}
 {% endblock %}
 
 <!-- BLOCK FOOTER-IMG -->

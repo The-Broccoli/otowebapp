@@ -35,6 +35,7 @@ def all_post(cUser = None):
     for p in sort_list:
         post_list.append(p[1])
     post_list.reverse()
+    del sort_list
     return post_list
 
 
@@ -153,15 +154,29 @@ def gallery():
         page = request.args.get('artwork', default=None, type=str)
         pageId = request.args.get('page', default=None, type=int)
         if pageId:
+            # Calculate which POST will be displayed
+            # page 1 = 1-8
+            # page 2 = 9-16
+            # page 3 = 17-24
+            # ....
             endRange = 8 * pageId
             startRange = (8 * pageId) - 8
-            print(str(startRange) + ' ' + str(endRange))
             try:
                 post_list = all_post()
+                # if there is a rest must be calculated a page exrta displays
+                if len(post_list) % 8:
+                    page_list = int(len(post_list) / 8) + 1
+                # otherwise you can divide it exactly by 8
+                else:
+                    page_list = int(len(post_list) / 8)
                 post_list = post_list[startRange:endRange]
             except:
                 post_list = None
-            return render_template('gallery.html', user=current_user, post_list=post_list)
+            del endRange, startRange
+            return render_template('gallery.html', user=current_user, 
+                                                post_list=post_list, 
+                                                page_list=page_list, 
+                                                current_page_id= pageId)
         if page == None:
             try:
                 post_list = all_post()
@@ -169,12 +184,13 @@ def gallery():
                 post_list = None
             # the normal gallery is displayed here
             return render_template('gallery.html', user=current_user, post_list=post_list)
-        result = db.session.query(Post).all()
-        for post in result:
-            if post.title == page:
-                post.views_counter = post.views_counter + 1
-                db.session.commit()
-                return render_template('portfolio_entry.html', user=current_user, post=post)
+        if page:
+            result = db.session.query(Post).all()
+            for post in result:
+                if post.title == page:
+                    post.views_counter = post.views_counter + 1
+                    db.session.commit()
+                    return render_template('portfolio_entry.html', user=current_user, post=post)
     # if this page does not exist
     return render_template('blank_page.html', user=current_user, mes=str(page))
 
