@@ -1,14 +1,24 @@
-from flask import Blueprint, render_template, request, flash, jsonify, redirect, url_for
-from flask_login import login_required, current_user
-from .models import Post, User
-from . import db
 import json
 import os
+import platform
 from datetime import datetime
+
+from flask import (Blueprint, flash, jsonify, redirect, render_template,
+                   request, url_for)
+from flask_login import current_user, login_required
+
+from . import db
+from .models import Post, User
 
 views = Blueprint('views', __name__)
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 ALLOWED_EXTENSIONS = set(['png'])
+
+def system_path_symbol():
+    if platform.system() == 'Windows':
+        return '\\'
+    if platform.system() == 'Darwin':
+        return '/'
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -38,7 +48,6 @@ def all_post(cUser = None):
     del sort_list
     return post_list
 
-
 @views.route('/', methods=['GET'])
 def home():
     if request.method == 'GET':
@@ -57,6 +66,7 @@ def settings():
     except:
         post_list = None
     if request.method == 'POST':
+        path_symbol = system_path_symbol()
         # check if the post request has the file part
         if 'thumbnailFile' not in request.files and 'workFile' not in request.files:
             flash('No file part!', category='error')
@@ -118,10 +128,13 @@ def settings():
             db.session.add(new_post)
             db.session.commit()
 
-            target = os.path.join(APP_ROOT, 'static/uploads/')
-            destination1 = "/".join([target, tfile.filename + '.png'])
+            if platform.system() == 'Windows':
+                target = os.path.join(APP_ROOT, 'static' + path_symbol + 'uploads')
+            if platform.system() == 'Darwin': # Mac
+                target = os.path.join(APP_ROOT, 'static' + path_symbol + 'uploads' + path_symbol)
+            destination1 = str(path_symbol).join([target, tfile.filename + '.png'])
             tfile.save(destination1)
-            destination2 = "/".join([target, wfile.filename + '.png'])
+            destination2 = str(path_symbol).join([target, wfile.filename + '.png'])
             wfile.save(destination2)
 
             flash('Seite added!', category='success')
