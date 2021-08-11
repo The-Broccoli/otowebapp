@@ -151,16 +151,16 @@ def delete_post():
 @views.route('/gallery', methods=['GET'])
 def gallery():
     if request.method == 'GET':
-        page = request.args.get('artwork', default=None, type=str)
-        pageId = request.args.get('page', default=None, type=int)
-        if pageId:
+        __artworkId = request.args.get('artwork', default=None, type=str)
+        __pageId = request.args.get('page', default=None, type=int)
+        if __pageId:
             # Calculate which POST will be displayed
             # page 1 = 1-8
             # page 2 = 9-16
             # page 3 = 17-24
             # ....
-            endRange = 8 * pageId
-            startRange = (8 * pageId) - 8
+            __endRange = 8 * __pageId
+            __startRange = (8 * __pageId) - 8
             try:
                 post_list = all_post()
                 # if there is a rest must be calculated a page exrta displays
@@ -169,26 +169,26 @@ def gallery():
                 # otherwise you can divide it exactly by 8
                 else:
                     page_list = int(len(post_list) / 8)
-                post_list = post_list[startRange:endRange]
+                post_list = post_list[__startRange:__endRange]
             except:
                 post_list = None
-            del endRange, startRange
+            del __endRange, __startRange
             return render_template('gallery.html', user=current_user, 
                                                 post_list=post_list, 
                                                 page_list=page_list, 
-                                                current_page_id= pageId)
-        if page == None:
+                                                current_page_id= __pageId)
+        if __artworkId == None:
             # redirect the user to the gallery with the agument 'page=1'
             return redirect(url_for('views.gallery', page='1'))
-        if page:
+        if __artworkId:
             result = db.session.query(Post).all()
             for post in result:
-                if post.title == page:
+                if post.title == __artworkId:
                     post.views_counter = post.views_counter + 1
                     db.session.commit()
                     return render_template('portfolio_entry.html', user=current_user, post=post)
     # if this page does not exist
-    return render_template('blank_page.html', user=current_user, mes=str(page))
+    return render_template('blank_page.html', user=current_user, mes=str(__artworkId))
 
 @views.route('/display/<filename>')
 def display_image(filename):
