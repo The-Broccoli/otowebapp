@@ -28,23 +28,9 @@
     border: none;
 }
 
-/* geht leider nicht auf seite 1 :(  warum auch immer... */
-.page_button:hover ~ .current_page_button{
-    color: #635F5F;
-	text-decoration:none;
-    padding:12px 16px;
-    font-size:12px;
-    background-image: none;
-    border-radius: 50%;
-    cursor:pointer;
-    font-weight:bold;
-    border: none;
-    background-color: #FAFAFA;
-}
-
 .page_button:hover{
     color:#ffffff;
-	background-image: linear-gradient(315deg, #77f46b 0%, #39e12a 100%);
+	background-color: #eeebeb;
 }
 .page_button:active{
 	position:relative;
