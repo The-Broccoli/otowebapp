@@ -67,8 +67,8 @@ GALLERY
                         var ctx = c.getContext("2d");
 
                         var grad= ctx.createLinearGradient(11,8,11,30);
-                        grad.addColorStop(0, "green");
-                        grad.addColorStop(1, "red");
+                        grad.addColorStop(0, "#39e12a");
+                        grad.addColorStop(1, "#77f46b");
                         ctx.strokeStyle = grad;
 
                         ctx.lineWidth = 3;
@@ -97,6 +97,12 @@ GALLERY
                     <script>
                         var c = document.getElementById("canvas_forward_button");
                         var ctx = c.getContext("2d");
+
+                        var grad= ctx.createLinearGradient(11,8,11,30);
+                        grad.addColorStop(0, "#39e12a");
+                        grad.addColorStop(1, "#77f46b");
+                        ctx.strokeStyle = grad;
+
                         ctx.lineWidth = 3;
                         ctx.lineCap = 'round';
                         ctx.moveTo(8,8);
