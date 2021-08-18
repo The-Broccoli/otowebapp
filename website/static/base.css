@@ -64,8 +64,9 @@ h2 {
     margin: 0;
 }
 
-footer {
-    text-align:center;
+footer .footer-tesxt {
+    align-items: end;
+    justify-content: center;
 }
 
 /* ----------------- keyvisual setting -------------------- */
@@ -160,6 +161,7 @@ footer {
 /*DESKTOP - 1024-1920px */
 @media screen and (min-width:1920px) {
     .container {
+        min-height: 100%;
         display: grid;
         grid-template-columns: 1fr 0.8fr 0.8fr 1fr;
         grid-template-rows: auto auto auto auto auto;
