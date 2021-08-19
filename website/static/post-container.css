@@ -17,7 +17,6 @@
 }
 
 .post-container .title-box{
-
     font-weight: bold;
     font-size: 20px;
     float: left;
@@ -42,7 +41,6 @@
 .title a:active{
     color: #6FF564;
 }
-
 
 .post-container .title-user{
     font-size: 12px;
@@ -80,7 +78,6 @@
     margin-right: 10px;
     background-image: linear-gradient(315deg, #FFE0A5 0%, #FFCC6C 100%);
     float: left;
-    border: none;
 }
 
 .circle-websites{
@@ -91,7 +88,6 @@
     margin-right: 10px;
     background-image: linear-gradient(315deg, #B3D7F7 0%, #64B2F5 100%);
     float: left;
-    border: none;
 }
 
 .circle-dev{
@@ -102,5 +98,4 @@
     margin-right: 10px;
     background-image: linear-gradient(315deg, #AEF7A8 0%, #6FF564 100%);
     float: left;
-    border: none;
 }

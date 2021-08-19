@@ -67,7 +67,10 @@ Home
                     {% endif%}
                     <div class="title-box">
                         <div class="title">
-                            {{ p.title }}<br>
+                            <a href="gallery?artwork={{ p.title }}">
+                                {{ p.title }}
+                            </a>
+                            <br>
                         </div>
                         <div class="title-user">
                             {{ p.user_name }}
