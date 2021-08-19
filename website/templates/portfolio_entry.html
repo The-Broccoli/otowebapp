@@ -5,6 +5,11 @@
 GALLERY - {{ post.title }}
 {% endblock %}
 
+<!-- BLOCK LINK -->
+{% block link %}
+<link rel="stylesheet" href="{{ url_for('static', filename='portfolio-entry.css') }}">
+{% endblock %}
+
 <!-- BLOCK KEYVISUAL -->
 {% block keyvisual %}
 <div class="keyvisual-bar">
@@ -17,25 +22,41 @@ GALLERY - {{ post.title }}
 <!-- BLOCK CONTENT -->
 {% block content %}
     {% if post %}
-        {{ post.title }}
-        <div>
-            <img src="{{ 'static/uploads/' + post.file_name + '.png'}}" alt="{{ 'a picture of ' + post.title }}"><br>
-            Title: {{ post.title }}<br>
+        <div class="post-entry-div">
+            {% if post.post_type == "logo"%}
+                <div class="circle-logo">
+                </div>
+            {% endif%}
+            {% if post.post_type == "icon"%}
+                <div class="circle-icon">
+                </div>
+            {% endif%}
+            {% if post.post_type == "websites"%}
+                <div class="circle-websites">
+                </div>
+            {% endif%}
+            {% if post.post_type == "dev"%}
+                <div class="circle-dev">
+                </div>
+            {% endif%}
+            <span id="titel">{{ post.title }}</span><br>
+            <span id="user">{{ post.user_name }}</span>
             {% set date = post.date|string %}
-            Date: {{ date[6:8] }} {{ date[4:6] }} {{ date[0:4] }} <br>
-            User: {{ post.user_name }}<br>
-            Description: {{ post.description }}<br>
-            Views: {{ post.views_counter }}
+            <span id="date">{{ date[6:8] }}.{{ date[4:6] }}.{{ date[0:4] }}</span><br>
+            <img src="{{ 'static/uploads/' + post.file_name + '.png'}}" alt="{{ 'a picture of ' + post.title }}"><br>
+            <span id="sescription">{{ post.description }}</span>
+            <span id="views-counter">{{ post.views_counter }}
         </div>
     {% else %}
         <b>there are no entries &#128531;</b>
     {% endif %}
+
 {% endblock %}
 
 <!-- BLOCK FOOTER-IMG -->
 {% block footerBar %}
 <span class="footer-bar">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1926 189"><defs><style>.cls-1{fill:#fafafa;}</style></defs><g id="Ebene_1" data-name="Ebene 1"><path class="cls-1" d="M562,152.68c343.5-37.57,468-99.17,812-99.17,297,0,501.65,73.93,552,94.12V0H0V152.68S218.5,190.25,562,152.68Z"/></g></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1926 360"><defs><style>.cls-1{fill:#fafafa;}</style></defs><g id="Ebene_1" data-name="Ebene 1"><path id="Pfad_49" data-name="Pfad 49" class="cls-1" d="M0,108.08s195-26,747.11,174S1926,118.57,1926,118.57V0H0Z"/></g></svg>
 </span>
 <div class="keyvisual-gradient">
 </div>

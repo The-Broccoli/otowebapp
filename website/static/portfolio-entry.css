@@ -1,71 +1,32 @@
 
-.post-grid{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-row-gap: 30px;
+.post-entry-div{
+    color: #707070;
 }
-
-.post-container{
-    width: 370px;
-    margin: 0 auto;
-}
-
-.post-container img{
+.post-entry-div img{
     border-radius: 10px;
     box-shadow: 0px 0px 35px rgb(230, 230, 230);
-    margin-bottom: 10px;
 }
 
-.post-container .title-box{
+#titel{
 
     font-weight: bold;
     font-size: 20px;
-    float: left;
 }
 
-.title a{
-    text-decoration: none;
-}
-
-.title a:link{
-    color: #707070;
-}
-
-.title a:visited{
-    color: #707070;
-}
-
-.title a:hover{
-    color: #535353;
-}
-
-.title a:active{
-    color: #6FF564;
-}
-
-
-.post-container .title-user{
+#date{
     font-size: 12px;
-    font-weight: normal;
 }
 
-.post-container .views-box{
-    font-size: 12px;
-    color: #B9B9B9;
-    margin-top: 1px;
-    margin-right: 10px;
-    float: right;
-}
-
-.post-container svg{
-    height: 17px;
-    float: right;
+#date::before {
+    content: "•";
+    margin: 0px 4px 0px 2px;
 }
 
 .circle-logo{
     border-radius: 100%;
     width: 30px;
     height: 30px;
+    background-color: blueviolet;
     margin-left: 10px;
     margin-right: 10px;
     background-image: linear-gradient(315deg, #FBBDC2 0%, #F45B69 100%);
@@ -76,6 +37,7 @@
     border-radius: 100%;
     width: 30px;
     height: 30px;
+    background-color: blueviolet;
     margin-left: 10px;
     margin-right: 10px;
     background-image: linear-gradient(315deg, #FFE0A5 0%, #FFCC6C 100%);
@@ -87,6 +49,7 @@
     border-radius: 100%;
     width: 30px;
     height: 30px;
+    background-color: blueviolet;
     margin-left: 10px;
     margin-right: 10px;
     background-image: linear-gradient(315deg, #B3D7F7 0%, #64B2F5 100%);
@@ -98,6 +61,7 @@
     border-radius: 100%;
     width: 30px;
     height: 30px;
+    background-color: blueviolet;
     margin-left: 10px;
     margin-right: 10px;
     background-image: linear-gradient(315deg, #AEF7A8 0%, #6FF564 100%);
