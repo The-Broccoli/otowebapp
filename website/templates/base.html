@@ -1,94 +1,98 @@
 <!doctype html>
 <html lang="de">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>
-            {% block title %}
-            TITLE
-            {% endblock %}
-        </title>
-        <link rel="stylesheet" href="{{ url_for('static', filename='base.css') }}">
-        {% block link %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+        {% block title %}
+        TITLE
         {% endblock %}
-    </head>
-    <body>
-        <div class="container">
-            <div>
-                <nav>
-                    <a href="/">HOME</a>
-                    <a href="/gallery">GALLERY</a>
-                    <div class="dropdown">
-                        <button class="dropbtn">MORE</button>
-                        <div class="dropdown-content">
-                            <a href="#">Link1</a>
-                            <a href="#">Link2</a>
-                            <a href="#">Link3</a>
-                        </div>
+    </title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='base.css') }}">
+    {% block link %}
+    {% endblock %}
+</head>
+
+<body>
+    <div class="container">
+        <div>
+            <nav>
+                <a href="/">HOME</a>
+                <a href="/gallery">GALLERY</a>
+                <div class="dropdown">
+                    <button class="dropbtn">MORE</button>
+                    <div class="dropdown-content">
+                        <a href="#">Link1</a>
+                        <a href="#">Link2</a>
+                        <a href="#">Link3</a>
                     </div>
-                    <a href="/contact">CONTACT</a>
-                </nav>
+                </div>
+                <a href="/contact">CONTACT</a>
+            </nav>
             <div class="logo-nav">
                 LOGO
             </div>
         </div>
-            <header>
-                {% block keyvisual %}
-                <h1>keyvisual - base.html</h1>
-                {% endblock %}
-            </header>
-            <!-- FLASH MESSAGES -->
-            <!-- TODO Es sind noch bootstrap reste dring vom Beispiel -->
-            {% with messages = get_flashed_messages(with_categories=true) %}
-                {% if messages %}
-                    {% for category, message in messages %}
-                        {% if category == 'error' %}
-                            <div class="alert alert-danger alter-dismissable fade show" role="alert">
-                                {{ message }}
-                                <button type="button" data-dismiss="alert">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                        {% else %}
-                        <div class="alert alert-success alter-dismissable fade show" role="alert">
-                            {{ message }}
-                            <button type="button" data-dismiss="alert">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        {% endif %}
-                    {% endfor%}
-                {% endif%}
-            {% endwith %}
-            <div class="content-container">
-                {% block content %}
-                CONTENT
-                {% endblock %}
-            </div>
-            <div class="footer-img-block">
-                {% block footerBar %}
-                footerBar - base.html
-                {% endblock %}
-            </div>
-            <footer>
-                <div class="footer-text">
+        <header>
+            {% block keyvisual %}
+            <h1>keyvisual - base.html</h1>
+            {% endblock %}
+        </header>
+        <!-- FLASH MESSAGES -->
+        <!-- TODO Es sind noch bootstrap reste dring vom Beispiel -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        {% if category == 'error' %}
+        <div class="alert alert-danger alter-dismissable fade show" role="alert">
+            {{ message }}
+            <button type="button" data-dismiss="alert">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% else %}
+        <div class="alert alert-success alter-dismissable fade show" role="alert">
+            {{ message }}
+            <button type="button" data-dismiss="alert">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endif %}
+        {% endfor%}
+        {% endif%}
+        {% endwith %}
+        <div class="content-container">
+            {% block content %}
+            CONTENT
+            {% endblock %}
+        </div>
+        <div class="footer-img-block">
+            {% block footerBar %}
+            footerBar - base.html
+            {% endblock %}
+        </div>
+        <footer>
+            <div class="footer-text">
+                <div class="footerCopyright">
                     © 2021 Fabio Korepp
+                </div>
+                <div class="footerLinks">
                     <a href="/impressum">Impressum</a>
                     {% if user %}
-                        {% if user.is_authenticated %}
-                            <a href="/settings">SETTINGS</a>
-                            <a href="/logout">LOGOUT</a>
-                        {% else %}
-                            <a href="/login">LOGIN</a>
-                            <a href="/sign-up">SIGN-UP</a>
-                        {% endif %}
+                    {% if user.is_authenticated %}
+                        <a href="/settings">SETTINGS</a>
+                        <a href="/logout">LOGOUT</a>
+                    {% else %}
+                        <a href="/login">LOGIN</a>
+                        <a href="/sign-up">SIGN-UP</a>
+                    {% endif %}
                     {% endif %}
                 </div>
-            </footer>
-        </div>
-        <script
-        type="text/javascript"
-        src="{{ url_for('static', filename='index.js') }}"
-        ></script>
-    </body>
+            </div>
+        </footer>
+    </div>
+    <script type="text/javascript" src="{{ url_for('static', filename='index.js') }}"></script>
+</body>
+
 </html>
