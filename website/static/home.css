@@ -1,7 +1,9 @@
-.services-grid{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-row-gap: 30px;
+.services{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
 
 .services-container{

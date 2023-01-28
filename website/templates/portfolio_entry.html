@@ -22,30 +22,32 @@ GALLERY - {{ post.title }}
 <!-- BLOCK CONTENT -->
 {% block content %}
     {% if post %}
-        <div class="post-entry-div">
-            {% if post.post_type == "logo"%}
-                <div class="circle-logo">
-                </div>
-            {% endif%}
-            {% if post.post_type == "icon"%}
-                <div class="circle-icon">
-                </div>
-            {% endif%}
-            {% if post.post_type == "websites"%}
-                <div class="circle-websites">
-                </div>
-            {% endif%}
-            {% if post.post_type == "dev"%}
-                <div class="circle-dev">
-                </div>
-            {% endif%}
-            <span id="titel">{{ post.title }}</span><br>
-            <span id="user">{{ post.user_name }}</span>
-            {% set date = post.date|string %}
-            <span id="date">{{ date[6:8] }}.{{ date[4:6] }}.{{ date[0:4] }}</span><br>
-            <img src="{{ 'static/uploads/' + post.file_name + '.png'}}" alt="{{ 'a picture of ' + post.title }}"><br>
-            <span id="sescription">{{ post.description }}</span>
-            <span id="views-counter">{{ post.views_counter }}
+        <div class="postContainer">
+            <div class="post-entry-div">
+                {% if post.post_type == "logo"%}
+                    <div class="circle-logo">
+                    </div>
+                {% endif%}
+                {% if post.post_type == "icon"%}
+                    <div class="circle-icon">
+                    </div>
+                {% endif%}
+                {% if post.post_type == "websites"%}
+                    <div class="circle-websites">
+                    </div>
+                {% endif%}
+                {% if post.post_type == "dev"%}
+                    <div class="circle-dev">
+                    </div>
+                {% endif%}
+                <span id="titel">{{ post.title }}</span><br>
+                <span id="user">{{ post.user_name }}</span>
+                {% set date = post.date|string %}
+                <span id="date">{{ date[6:8] }}.{{ date[4:6] }}.{{ date[0:4] }}</span><br>
+                <img src="{{ 'static/uploads/' + post.file_name + '.png'}}" alt="{{ 'a picture of ' + post.title }}"><br>
+                <span id="sescription">{{ post.description }}</span>
+                <span id="views-counter">{{ post.views_counter }}
+            </div>
         </div>
     {% else %}
         <b>there are no entries &#128531;</b>
@@ -55,9 +57,7 @@ GALLERY - {{ post.title }}
 
 <!-- BLOCK FOOTER-IMG -->
 {% block footerBar %}
-<span class="footer-bar">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1926 360"><defs><style>.cls-1{fill:#fafafa;}</style></defs><g id="Ebene_1" data-name="Ebene 1"><path id="Pfad_49" data-name="Pfad 49" class="cls-1" d="M0,108.08s195-26,747.11,174S1926,118.57,1926,118.57V0H0Z"/></g></svg>
-</span>
 <div class="keyvisual-gradient">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1926 360"><defs><style>.cls-1{fill:#fafafa;}</style></defs><g id="Ebene_1" data-name="Ebene 1"><path id="Pfad_49" data-name="Pfad 49" class="cls-1" d="M0,108.08s195-26,747.11,174S1926,118.57,1926,118.57V0H0Z"/></g></svg>
 </div>
 {% endblock %}
