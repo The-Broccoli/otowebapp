@@ -40,13 +40,14 @@ GALLERY - {{ post.title }}
                     <div class="circle-dev">
                     </div>
                 {% endif%}
+                <br>
+                <img src="{{ 'static/uploads/' + post.file_name + '.png'}}" alt="{{ 'a picture of ' + post.title }}"><br>
+                <span id="sescription">{{ post.description }}</span>
+                <span id="views-counter">{{ post.views_counter }}</span><br>
                 <span id="titel">{{ post.title }}</span><br>
                 <span id="user">{{ post.user_name }}</span>
                 {% set date = post.date|string %}
-                <span id="date">{{ date[6:8] }}.{{ date[4:6] }}.{{ date[0:4] }}</span><br>
-                <img src="{{ 'static/uploads/' + post.file_name + '.png'}}" alt="{{ 'a picture of ' + post.title }}"><br>
-                <span id="sescription">{{ post.description }}</span>
-                <span id="views-counter">{{ post.views_counter }}
+                <span id="date">{{ date[6:8] }}.{{ date[4:6] }}.{{ date[0:4] }}</span>
             </div>
         </div>
     {% else %}

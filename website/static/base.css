@@ -100,7 +100,7 @@ h2 {
 .keyvisual-gradient{
     z-index: 1;
     width: 100vw;
-    height: 26vh;
+    height: 25vh;
     background: linear-gradient(45deg, #278A3E, #37C559, #B9EEC6);
 }
 
