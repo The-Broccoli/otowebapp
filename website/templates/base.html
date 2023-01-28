@@ -10,29 +10,30 @@
         {% endblock %}
     </title>
     <link rel="stylesheet" href="{{ url_for('static', filename='base.css') }}">
+    <script src="../static/base.js"></script>
     {% block link %}
     {% endblock %}
 </head>
 
 <body>
     <div class="container">
-        <div>
-            <nav>
-                <a href="/">HOME</a>
-                <a href="/gallery">GALLERY</a>
-                <div class="dropdown">
-                    <button class="dropbtn">MORE</button>
-                    <div class="dropdown-content">
-                        <a href="#">Link1</a>
-                        <a href="#">Link2</a>
-                        <a href="#">Link3</a>
-                    </div>
-                </div>
-                <a href="/contact">CONTACT</a>
-            </nav>
+        <div id="navBar" class="navBar">
             <div class="logo-nav">
                 LOGO
             </div>
+            <nav id="nav" onclick="mobileCloseNav()" class="navOpenMobile mobile">
+                <div class="links">
+                    <a href="/">HOME</a>
+                    <a href="/gallery">GALLERY</a>
+                    <a class="noBorder" href="/contact">CONTACT</a>
+                </div>
+            </nav>
+            <div id="burgerMenu" class="burgerMenu">
+                <svg onclick="mobileOpenNav()" xmlns="http://www.w3.org/2000/svg" height="48" width="48">
+                    <path d="M6 36v-3h36v3Zm0-10.5v-3h36v3ZM6 15v-3h36v3Z" />
+                </svg>
+            </div>
+
         </div>
         <header>
             {% block keyvisual %}
@@ -75,17 +76,17 @@
         <footer>
             <div class="footer-text">
                 <div class="footerCopyright">
-                    © 2021 Fabio Korepp
+                    © 2023 Fabio Korepp
                 </div>
                 <div class="footerLinks">
                     <a href="/impressum">Impressum</a>
                     {% if user %}
                     {% if user.is_authenticated %}
-                        <a href="/settings">SETTINGS</a>
-                        <a href="/logout">LOGOUT</a>
+                    <a href="/settings">SETTINGS</a>
+                    <a href="/logout">LOGOUT</a>
                     {% else %}
-                        <a href="/login">LOGIN</a>
-                        <a href="/sign-up">SIGN-UP</a>
+                    <a href="/login">LOGIN</a>
+                    <a href="/sign-up">SIGN-UP</a>
                     {% endif %}
                     {% endif %}
                 </div>

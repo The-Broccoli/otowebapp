@@ -112,6 +112,57 @@ h2 {
     height: 20vh;
 }
 
+.mobile {
+    display: none !important;
+}
+
+.navOpenMobile {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    z-index: 20;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+}
+
+.navOpenMobile a {
+    color: #A5A9AE;
+    background-color: white;
+    padding: 10px;
+    padding-top: unset;
+    border-bottom: 1px solid lightgray;
+    width: 94px;
+    display: flex;
+    justify-content: center;
+}
+
+.links{
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.noBorder {
+    border-bottom: unset !important;
+}
+
+.fixed {
+    position: fixed !important;
+}
+
+.burgerMenu {
+    z-index: 21;
+}
+
 .footer-bar svg {
     position: absolute;
     top: 0;
@@ -126,22 +177,17 @@ h2 {
     position: relative;
 }
 
-nav {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 70vw;
-    height: 50px;
-    z-index: 4;
-
-}
-.logo-nav {
+.navBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     position: absolute;
     top: 0;
     left: 0;
-    width: 30vw;
+    right: 0;
     height: 50px;
-    z-index: 4;
+    z-index: 5;
+    padding: 10px 20px 0px 20px;
 }
 
 /* ----------------- error setting -------------------- */
