@@ -157,6 +157,7 @@ h2 {
 
 .fixed {
     position: fixed !important;
+    padding: 10px 20px 0px 20px;
 }
 
 .burgerMenu {
