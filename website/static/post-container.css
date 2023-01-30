@@ -11,9 +11,9 @@
 .post-container{
     width: 370px;
     margin: 0 auto;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-    background-color: #FFFF;  
+    border-radius: 10px;
+    background-color: white; 
+    box-shadow: 0px 8px 15px 0px rgba(0,0,0,0.2);
 }
 
 .post-container img{

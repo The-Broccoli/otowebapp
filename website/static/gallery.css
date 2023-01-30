@@ -5,6 +5,10 @@
     justify-content: center;
 }
 
+.cardBottom {
+    height: 100px;
+}
+
 .page_button{
     color: #635F5F;
 	text-decoration:none;
