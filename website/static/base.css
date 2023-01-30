@@ -74,19 +74,78 @@ h2 {
     right: 0;
     height: 50px;
     gap: 10px;
-
+    font-weight: bold;
+    
 }
 
 .footerLinks {
     display: flex;
     gap: 10px;
+    align-items: center;
+    justify-content: center;
 }
+
+.footerLinks a {
+    text-decoration: none;
+    color: black;
+    border-bottom: 2px solid black;
+    font-weight: bold;
+    width: 86px;
+    height: 20px;
+    text-align: center;
+}
+
+
 
 .footerCopyright {
     margin-bottom: 10px;
 }
 
 /* ----------------- keyvisual setting -------------------- */
+
+.bgcolor {
+    background: linear-gradient(45deg, #278A3E, #37C559, #B9EEC6);
+    width: 100%;
+    height: 80%;
+}
+
+.topSVG {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    border-top: 2px solid #FAFAFA;
+}
+
+.topSVG path {
+    fill: #FAFAFA;
+}
+
+.topSVG svg {
+    transform: translateX(-200px);
+}
+
+.midSVG {
+    position: absolute;
+    top: 22vh;
+    
+}
+
+.midSVG svg {
+    transform: translateX(-200px);
+}
+
+.bottomRightSVG {
+    position: absolute;
+    bottom: 0;
+    left: 70%;
+}
+
+.bottomLeftSVG {
+    position: absolute;
+    bottom: 0;
+    right: 70%;
+ 
+}
 
 .keyvisual-bar{
     z-index: 2;
@@ -100,13 +159,24 @@ h2 {
 .keyvisual-gradient{
     z-index: 1;
     width: 100vw;
-    height: 25vh;
+    height: 500px;
     background: linear-gradient(45deg, #278A3E, #37C559, #B9EEC6);
+}
+
+footer {
+    position: relative;
+    background-color: #FAFAFA;
+    height: 550px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    overflow: hidden;
+    width: 100%;
 }
 
 .footer-bar{
     z-index: 3;
-    position: relative;
+    /*position: relative;*/
     display: flex;
     width: 100vw;
     height: 20vh;
