@@ -5,6 +5,11 @@
 SETTINGS
 {% endblock %}
 
+<!-- BLOCK LINK -->
+{% block link %}
+<link rel="stylesheet" href="{{ url_for('static', filename='settings.css') }}">
+{% endblock %}
+
 <!-- BLOCK KEYVISUAL -->
 {% block keyvisual %}
 <div class="keyvisual-bar">
@@ -16,43 +21,46 @@ SETTINGS
 
 <!-- BLOCK CONTENT -->
 {% block content %}
-<h1>Add new Content </h1>
-<p>Hey was geht {{ user.first_name }}!</p>
-<form method="POST" enctype="multipart/form-data">
-    <!-- x -->
-    <label for="title">Title:</label><br>
-    <input type="text" id="title" name="title" placeholder="Enter the Post-Title" required><br>
-    <!-- x -->
-    <br>the Thumbnail should be <b>370x250</b> in size<br>
-    <label for="thumbnailFile">thumbnail file:</label>
-    <input type="file" id="thumbnailFile" name="thumbnailFile" required><br>
-    <!-- x -->
-    <label for="workFile">work file:</label>
-    <input type="file" id="workFile" name="workFile"><br>
-    <!-- x -->
-    <p>Choose your Post type</p>
-    <input type="radio" id="logo" name="postType" value="logo">
-    <label for="logo">Logo</label><br>
-    <input type="radio" id="icon" name="postType" value="icon">
-    <label for="icon">Icon/Illustration</label><br>
-    <input type="radio" id="websites" name="postType" value="websites">
-    <label for="websites">Websites</label><br>
-    <input type="radio" id="dev" name="postType" value="dev">
-    <label for="dev">Development</label><br>
-    <!-- x -->
-    <p>Description</p>
-    <textarea name="description" id="description" placeholder="Describe your work" required>
-    </textarea><br>
-    <!-- x -->
-    <p>Date of creation</p>
-    <label for="date">Date:</label>
-    <input type="date" id="date" name="date" required><br>
+<div class="boxContainer">
+    <div class="box">
+        <h1>Add new Content </h1>
+        <p>Hey was geht {{ user.first_name }}!</p>
+        <form method="POST" enctype="multipart/form-data">
+            <!-- x -->
+            <label for="title">Title:</label><br>
+            <input type="text" id="title" name="title" placeholder="Enter the Post-Title" required><br>
+            <!-- x -->
+            <br>the Thumbnail should be <b>370x250</b> in size<br>
+            <label for="thumbnailFile">thumbnail file:</label>
+            <input type="file" id="thumbnailFile" name="thumbnailFile" required><br>
+            <!-- x -->
+            <label for="workFile">work file:</label>
+            <input type="file" id="workFile" name="workFile"><br>
+            <!-- x -->
+            <p>Choose your Post type</p>
+            <input type="radio" id="logo" name="postType" value="logo">
+            <label for="logo">Logo</label><br>
+            <input type="radio" id="icon" name="postType" value="icon">
+            <label for="icon">Icon/Illustration</label><br>
+            <input type="radio" id="websites" name="postType" value="websites">
+            <label for="websites">Websites</label><br>
+            <input type="radio" id="dev" name="postType" value="dev">
+            <label for="dev">Development</label><br>
+            <!-- x -->
+            <p>Description</p>
+            <textarea name="description" id="description" placeholder="Describe your work" required>
+            </textarea><br>
+            <!-- x -->
+            <p>Date of creation</p>
+            <label for="date">Date:</label>
+            <input type="date" id="date" name="date" required><br>
 
-    <div>
-        <button type="submit">Add Content</button>
+            <div>
+            <button type="submit">Add Content</button>
+            </div>
+        </form>
     </div>
-</form>
-
+</div>
 <h1>Content List</h1>
 {% if post_list %}
     <div class="post-grid">

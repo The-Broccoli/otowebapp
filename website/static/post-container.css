@@ -1,18 +1,37 @@
 
 .post-grid{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-row-gap: 30px;
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 50px;
+    
 }
 
 .post-container{
+    position: relative;
     width: 370px;
     margin: 0 auto;
+    border-radius: 10px;
+    background-color: white; 
+    box-shadow: 0px 8px 15px 0px rgba(0,0,0,0.2);
+}
+
+.circles {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+.circles span {
+    color: white;
+    padding: 0px 10px 0px 10px;
 }
 
 .post-container img{
-    border-radius: 10px;
-    box-shadow: 0px 0px 35px rgb(230, 230, 230);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    /*box-shadow: 0px 0px 35px rgb(230, 230, 230);*/
     margin-bottom: 10px;
 }
 
@@ -22,8 +41,22 @@
     float: left;
 }
 
+.title-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.title {
+    padding: 0px 20px 0px 20px;
+    text-align: center;
+}
+
 .title a{
     text-decoration: none;
+    
 }
 
 .title a:link{
@@ -47,12 +80,29 @@
     font-weight: normal;
 }
 
-.post-container .views-box{
+.dateViews {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 12px;
+    color: #B9B9B9;
+}
+
+.date {
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    color: #B9B9B9;
+}
+
+.views-box{
+    display: flex;
+    align-items: center;
     font-size: 12px;
     color: #B9B9B9;
     margin-top: 1px;
     margin-right: 10px;
-    float: right;
 }
 
 .post-container svg{
@@ -61,41 +111,45 @@
 }
 
 .circle-logo{
-    border-radius: 100%;
-    width: 30px;
-    height: 30px;
-    margin-left: 10px;
-    margin-right: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px; 
+    min-width: 60px;
+    min-height: 25px;
     background-image: linear-gradient(315deg, #FBBDC2 0%, #F45B69 100%);
     float: left;
 }
 
 .circle-icon{
-    border-radius: 100%;
-    width: 30px;
-    height: 30px;
-    margin-left: 10px;
-    margin-right: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px; 
+    min-width: 60px;
+    min-height: 25px;
     background-image: linear-gradient(315deg, #FFE0A5 0%, #FFCC6C 100%);
     float: left;
 }
 
 .circle-websites{
-    border-radius: 100%;
-    width: 30px;
-    height: 30px;
-    margin-left: 10px;
-    margin-right: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px; 
+    min-width: 60px;
+    min-height: 25px;
     background-image: linear-gradient(315deg, #B3D7F7 0%, #64B2F5 100%);
     float: left;
 }
 
 .circle-dev{
-    border-radius: 100%;
-    width: 30px;
-    height: 30px;
-    margin-left: 10px;
-    margin-right: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px; 
+    min-width: 60px;
+    min-height: 25px;
     background-image: linear-gradient(315deg, #AEF7A8 0%, #6FF564 100%);
     float: left;
 }
